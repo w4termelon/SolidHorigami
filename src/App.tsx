@@ -1,7 +1,7 @@
 import { Component, Show, createSignal } from 'solid-js';
 import { createStore } from "solid-js/store";
 import styles from './App.module.css';
-import * as OverlayPluginApi from './overlay.js';
+import * as OverlayPlugin from './ACTOverlay';
 import { CombatData, CombatDataReceive } from './types/CombatData';
 import CombatantList from './components/CombatantList/CombatantList';
 import dummy from '../dummy-encounter.json'
@@ -25,7 +25,7 @@ const App: Component = () => {
     setCombatData(combatTestData)
   }
   else {
-    OverlayPluginApi.addOverlayListener("CombatData", (e: CombatDataReceive) => {
+    OverlayPlugin.addOverlayListener("CombatData", (e: CombatDataReceive) => {
       setCombatData({
         isActive: e.isActive,
         type: e.type,
@@ -45,7 +45,7 @@ const App: Component = () => {
         })
       })
     });
-    OverlayPluginApi.startOverlayEvents();
+    OverlayPlugin.startOverlayEvents();
   }
   return (
     <div class={styles.App} style={{ "min-width": "1280px" }}>
